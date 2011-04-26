@@ -18,8 +18,10 @@ NSString * const kPublicTimelineRequestURL = @"http://api.twitter.com/1/statuses
 // cell style constants
 NSString * const kUserScreenNameFont = @"Helvetica-Bold";
 NSString * const kStatusUpdateFont = @"Helvetica";
+float const kUserScreenNameFontSize = 12.0;
+float const kStatusUpdateFontSize = 14.0;
 
-// cell tag constants
+// cell view tag constants
 int const kUserScreenNameViewTag = 1;
 int const kStatusUpdateViewTag = 2;
 
@@ -180,17 +182,23 @@ int const kStatusUpdateViewTag = 2;
 	
 	if (!userName){
 		userName = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 2.0, cell.contentView.frame.size.width, 14.0)];
-		[userName setFont:[UIFont fontWithName:kUserScreenNameFont size:12.0]];
+		[userName setFont:[UIFont fontWithName:kUserScreenNameFont size:kUserScreenNameFontSize]];
+
+		// Tag the view so that it can be retreived for cell re-use
 		[userName setTag:kUserScreenNameViewTag];
+
 		[cell.contentView addSubview:userName];
 		[userName release];
 	} else {
 		userName = (UILabel *)userName;
 	}
+	
 	if (!tweetUpdate){
 		tweetUpdate = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 15.0, cell.contentView.frame.size.width - 10.0, cell.contentView.frame.size.height - 15.0)];
-		[tweetUpdate setFont:[UIFont fontWithName:kStatusUpdateFont size:14.0]];
-		[tweetUpdate setTag:kStatusUpdateViewTag];	
+		[tweetUpdate setFont:[UIFont fontWithName:kStatusUpdateFont size:kStatusUpdateFontSize]];
+		
+		[tweetUpdate setTag:kStatusUpdateViewTag];
+		
 		[cell.contentView addSubview:tweetUpdate];
 		[tweetUpdate release];
 	} else {
